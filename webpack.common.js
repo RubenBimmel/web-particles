@@ -1,7 +1,7 @@
 const path = require('path');
 
 module.exports = {
-    entry: './src/index.ts',
+    entry: './src/index.js',
     output: {
         filename: 'main.js',
         path: path.resolve(__dirname, 'dist'),
@@ -13,7 +13,17 @@ module.exports = {
     module: {
         rules: [
             // all files with a `.ts` or `.tsx` extension will be handled by `ts-loader`
-            { test: /\.tsx?$/, loader: "ts-loader" }
+            { 
+                test: /\.tsx?$/, 
+                loader: "ts-loader" 
+            },
+            {
+                test: /\.wasm$/,
+                type: 'asset/resource'
+            }
         ]
+    },
+    experiments: {
+        asyncWebAssembly: true
     }
 };

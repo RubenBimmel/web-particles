@@ -4,8 +4,11 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "build": "webpack",
-    "watch": "webpack --watch"
+    "asbuild": "asc src/assembly/index.ts -b src/build/optimized.wasm -t src/build/optimized.wat --exportRuntime --sourceMap --optimize",
+    "webpack:dev": "webpack serve --config webpack.development.js",
+    "webpack:prod": "webpack --config webpack.production.js",
+    "build": "npm run webpack:prod && npm run asbuild",
+    "watch": "npm run webpack:dev"
   },
   "repository": {
     "type": "git",
@@ -19,10 +22,17 @@
   },
   "homepage": "https://github.com/RubenBimmel/web-particles#readme",
   "devDependencies": {
+    "assemblyscript": "^0.18.11",
+    "clean-webpack-plugin": "^3.0.0",
     "ts-loader": "^8.0.17",
     "ts-node": "^9.1.1",
     "typescript": "^4.2.2",
     "webpack": "^5.24.2",
-    "webpack-cli": "^4.5.0"
+    "webpack-cli": "^4.5.0",
+    "webpack-dev-server": "^3.11.2",
+    "webpack-merge": "^5.7.3"
+  },
+  "dependencies": {
+    "@assemblyscript/loader": "^0.18.11"
   }
 }

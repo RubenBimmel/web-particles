@@ -1,10 +1,20 @@
-const { merge } = require('webpack-merge');
-const common = require('./webpack.common.js');
-const { CleanWebpackPlugin } = require('clean-webpack-plugin');
+const path = require('path');
 
-module.exports = merge(common, {
+module.exports = {
     mode: 'production',
-    plugins: [
-        new CleanWebpackPlugin()
-    ]
-});
+    entry: './src/index.ts',
+    output: {
+        filename: 'main.js',
+        path: path.resolve(__dirname, 'dist'),
+    },
+    resolve: {
+        // Add `.ts` and `.tsx` as a resolvable extension.
+        extensions: [".ts", ".tsx", ".js"]
+    },
+    module: {
+        rules: [
+            // all files with a `.ts` or `.tsx` extension will be handled by `ts-loader`
+            { test: /\.tsx?$/, loader: "ts-loader" }
+        ]
+    },
+};

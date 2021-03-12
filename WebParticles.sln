@@ -1,8 +1,31 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Editor", "Editor", "{2EE15FD0-A1A6-4072-8D59-657B0832AD0A}"
+ProjectSection(SolutionItems) = preProject
+	editor\editor.js = editor\editor.js
+	editor\index.html = editor\index.html
+	editor\stylesheet.css = editor\stylesheet.css
+EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Package", "Package", "{4BAFB716-B5F4-44A4-AB73-269B97F476BB}"
+ProjectSection(SolutionItems) = preProject
+	package\package.json = package\package.json
+	package\package-lock.json = package\package-lock.json
+	package\tsconfig.json = package\tsconfig.json
+	package\webpack.production.js = package\webpack.production.js
+EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{3F697B0B-D1F1-4CB0-9230-52D44EB07BD6}"
+ProjectSection(SolutionItems) = preProject
+	package\src\index.ts = package\src\index.ts
+EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{3F697B0B-D1F1-4CB0-9230-52D44EB07BD6} = {4BAFB716-B5F4-44A4-AB73-269B97F476BB}
 	EndGlobalSection
 EndGlobal

@@ -9,8 +9,8 @@ export interface particle {
 }
 
 export interface particleCreateSettings {
-    startPosition?: Vector;
-    startSpeed?: Vector;
+    position?: Vector;
+    speed?: Vector;
     settings?: particleSettings;
 }
 
@@ -28,17 +28,21 @@ const defaultOptions: options = {
     color: "white"
 }
 
-const defaultSettings: particleSettings = {
-    size: { x: 10, y: 10 },
-    color: "black"
+const defaultSettings: particle = {
+    position: { x: 50, y: 50 },
+    speed:  { x: 10, y: 10 },
+    settings: {
+        size: { x: 10, y: 10 },
+        color: "black"
+    }
 }
 
-class Instance {
+export default class Instance {
     ctx: CanvasRenderingContext2D;
     width: number;
     height: number;
     options: options;
-    
+
     particles: particle[] = [];
     active: boolean = false;
     timeStamp: number | null = null;
@@ -47,17 +51,13 @@ class Instance {
         this.ctx = canvas.getContext('2d');
         this.width = canvas.width;
         this.height = canvas.height;
-        this.options = options;
+        this.options = { ...options, ...defaultOptions };
 
         this.clear();
     }
     
     emit(settings: particleCreateSettings) {
-        let particle: particle = {
-            position: settings.startPosition || { x: this.width / 2, y: this.height / 2},
-            speed: settings.startSpeed || { x: 10, y: 10 },
-            settings: { ...settings.settings, ...defaultSettings },
-        }
+        let particle: particle = { ...settings, ...defaultSettings };
         
         this.particles.push(particle);
         this.start();
@@ -70,7 +70,7 @@ class Instance {
         
         window.requestAnimationFrame(now => {
             this.timeStamp = now;
-            window.requestAnimationFrame(this.draw);
+            this.draw(now);
         });
     }
     
@@ -81,7 +81,7 @@ class Instance {
     }
     
     draw(now: number) {
-        if (this.particles.length > 0) {
+        if (this.particles.length == 0) {
             this.stop();
             return;
         }
@@ -90,7 +90,7 @@ class Instance {
         this.timeStamp = now;
         
         this.clear();
-        
+
         this.particles.forEach(particle => {
             particle.position.x += particle.speed.x * deltaTime / 1000;
             particle.position.y += particle.speed.y * deltaTime / 1000;
@@ -98,6 +98,8 @@ class Instance {
             this.ctx.fillStyle = particle.settings.color;
             this.ctx.fillRect(particle.position.x, particle.position.y, particle.settings.size.x, particle.settings.size.y);
         });
+
+        window.requestAnimationFrame(time => this.draw(time));
     }
     
     clear() {
@@ -105,7 +107,3 @@ class Instance {
         this.ctx.fillRect(0, 0, this.width, this.height);
     }
 }
-
-var canvas = document.getElementById("canvas") as HTMLCanvasElement;
-var instance = new Instance(canvas, {});
-instance.emit({});

@@ -1,0 +1,53 @@
+<!doctype html>
+
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+
+    <title>Web Particles</title>
+    <meta name="description" content="The HTML5 Herald">
+    <meta name="author" content="SitePoint">
+    <link rel="stylesheet" href="stylesheet.css">
+</head>
+
+<body>
+    <div class="wrapper">
+        <div class="canvas-wrapper">
+            <canvas id="canvas" width="200px" height="200px"></canvas>
+        </div>
+        <form id="editor" class="editor">
+            <button type="button" class="collapsible">Emission</button>
+            <div class="collapsible-content">
+                <div class="vector-input">
+                    <label for="startPosX"><b>Start position: </b></label>
+                    <label for="startPosX">X</label><input id="startPosX" type="number" placeholder="50" name="startPosX">
+                    <label for="startPosY">Y</label><input id="startPosY" type="number" placeholder="50" name="startPosY">
+                </div>
+                <div class="vector-input">
+                    <label for="startVelocityX"><b>Start velocity: </b></label>
+                    <label for="startVelocityX">X</label><input id="startVelocityX" type="number" placeholder="10" name="startVelocityX">
+                    <label for="startVelocityY">Y</label><input id="startVelocityY" type="number" placeholder="10" name="startVelocityY">
+                </div>
+            </div>
+            <button type="button" class="collapsible">Shape</button>
+            <div class="collapsible-content">
+                <div class="vector-input">
+                    <label for="sizeX"><b>Size: </b></label>
+                    <label for="sizeX">X</label><input id="sizeX" type="number" placeholder="10" name="sizeX">
+                    <label for="sizeY">Y</label><input id="sizeY" type="number" placeholder="10" name="sizeY">
+                </div>
+                <div class="input">
+                    <label for="color"><b>Color: </b></label>
+                    <input id="color" type="text" placeholder="black" name="color">
+                </div>
+            </div>
+            <div class="content">
+                <button type="submit">Emit</button>
+            </div>
+        </form>
+    </div>
+    
+    <script src="../dist/main.js"></script>
+    <script src="editor.js"></script>
+</body>
+</html>
